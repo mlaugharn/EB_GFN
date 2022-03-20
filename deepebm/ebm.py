@@ -11,7 +11,7 @@ from tqdm import tqdm
 import argparse
 import network
 
-sys.path.append("/home/zhangdh/EB_GFN")
+sys.path.insert(0, "..")
 from gflownet import get_GFlowNet
 import utils_data
 

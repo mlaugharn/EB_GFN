@@ -426,9 +426,9 @@ class GFlowNet_LearnedPb_TB:
                 # add_prob = add_prob ** (1 / self.exp_temp)
                 add_sample = add_prob.multinomial(1)  # row sum not need to be 1
                 if self.init_zero:
-                    add_locs, add_values = add_sample // 2, 2 * (add_sample % 2) - 1
+                    add_locs, add_values = torch.div(add_sample, 2, rounding_mode="floor"), 2 * (add_sample % 2) - 1
                 else:
-                    add_locs, add_values = add_sample // 2, add_sample % 2
+                    add_locs, add_values = torch.div(add_sample, 2, rounding_mode="floor"), add_sample % 2
 
                 x = x.scatter(1, add_locs, add_values.float())
         return x
